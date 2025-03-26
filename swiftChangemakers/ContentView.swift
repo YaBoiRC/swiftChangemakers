@@ -10,12 +10,36 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Tabview()
+                        .navigationBarBackButtonHidden(true)
         }
-        .padding()
+        
+    }
+}
+
+struct Tabview: View {
+    var body: some View {
+        
+        TabView {
+            HomeView()
+                .tabItem {
+                    Image(systemName: "house.fill")
+                    Text("Home")
+                }
+            
+            UserView()
+                .tabItem {
+                    Image(systemName: "person.fill")
+                    Text("User")
+                }
+            
+            SettingsView()
+                .tabItem {
+                    Image(systemName: "gearshape.fill")
+                    Text("Settings")
+                }
+            
+        }
     }
 }
 
