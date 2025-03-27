@@ -12,48 +12,107 @@ struct NewsView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 20) {
-                if let weather = viewModel.weather {
-                    // Convertimos la temperatura de Kelvin a Celsius (aprox)
-                    let celsius = weather.main.temp - 273.15
-                    Text("Clima en Monterrey")
-                        .font(.headline)
-                    
-                    Text("Temperatura: \(String(format: "%.1f", celsius))°C")
-                        .font(.subheadline)
-                    
-                    // Tomamos la primera descripción disponible
-                    if let description = weather.weather.first?.description.capitalized {
-                        Text("Condición: \(description)")
-                            .font(.subheadline)
+            VStack(alignment: .leading) {
+                Text("Noticias en Monterrey")
+                    .font(.title)
+                    .padding(.horizontal)
+                    .padding(.top)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 20) {
+                        // Widget de Clima
+                        if let weather = viewModel.weather {
+                            let celsius = weather.main.temp - 273.15
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Clima en Monterrey")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                Text("Temp: \(String(format: "%.1f", celsius))°C")
+                                    .font(.subheadline)
+                                    .foregroundColor(.white)
+                                if let description = weather.weather.first?.description.capitalized {
+                                    Text("Condición: \(description)")
+                                        .font(.subheadline)
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            .padding()
+                            .frame(width: 250, height: 150)
+                            .background(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(Color.blue)
+                                    .shadow(radius: 5)
+                            )
+                        } else {
+                            // Estado de carga para clima
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(Color.gray.opacity(0.3))
+                                .frame(width: 250, height: 150)
+                                .overlay(
+                                    Text("Cargando clima...")
+                                        .foregroundColor(.gray)
+                                )
+                        }
+                        
+                        // Widget de Contaminación
+                        if let pollution = viewModel.pollution {
+                            let aqiValue = pollution.list.first?.main.aqi ?? 0
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Calidad del aire")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                Text("AQI: \(aqiValue)")
+                                    .font(.subheadline)
+                                    .foregroundColor(.white)
+                                Text(aqiDescription(for: aqiValue))
+                                    .font(.caption)
+                                    .foregroundColor(.white)
+                            }
+                            .padding()
+                            .frame(width: 250, height: 150)
+                            .background(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(Color.green)
+                                    .shadow(radius: 5)
+                            )
+                        } else {
+                            // Estado de carga para contaminación
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(Color.gray.opacity(0.3))
+                                .frame(width: 250, height: 150)
+                                .overlay(
+                                    Text("Cargando contaminación...")
+                                        .foregroundColor(.gray)
+                                )
+                        }
                     }
-                } else {
-                    Text("Cargando información del clima...")
-                        .foregroundColor(.gray)
-                }
-                
-                Divider()
-                
-                if let pollution = viewModel.pollution {
-                    // aqi es un índice de 1 a 5
-                    let aqiValue = pollution.list.first?.main.aqi ?? 0
-                    Text("Calidad del aire en Monterrey")
-                        .font(.headline)
-                    Text("AQI (Índice de calidad): \(aqiValue)")
-                        .font(.subheadline)
-                } else {
-                    Text("Cargando información de contaminación...")
-                        .foregroundColor(.gray)
+                    .padding(.horizontal)
                 }
                 
                 Spacer()
             }
-            .padding()
             .navigationTitle("News")
             .onAppear {
-                // Cargamos ambos datos al aparecer la vista
                 viewModel.fetchData()
             }
+        }
+    }
+    
+    // Función auxiliar para obtener la descripción del AQI
+    private func aqiDescription(for value: Int) -> String {
+        switch value {
+        case 1:
+            return "Buena"
+        case 2:
+            return "Moderada"
+        case 3:
+            return "Pobre"
+        case 4:
+            return "Muy pobre"
+        case 5:
+            return "Extremadamente pobre"
+        default:
+            return "Desconocida"
         }
     }
 }
