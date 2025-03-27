@@ -50,6 +50,11 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		FBC8350C2D95F90600F3654B /* OpenWeather */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = OpenWeather;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +85,7 @@
 		39DFBB392D93D9F80017431C = {
 			isa = PBXGroup;
 			children = (
+				FBC8350C2D95F90600F3654B /* OpenWeather */,
 				FB48E1A92D93EA4900B97FD9 /* Views */,
 				39DFBB442D93D9F80017431C /* swiftChangemakers */,
 				39DFBB552D93D9FB0017431C /* swiftChangemakersTests */,
@@ -116,6 +122,7 @@
 			fileSystemSynchronizedGroups = (
 				39DFBB442D93D9F80017431C /* swiftChangemakers */,
 				FB48E1A92D93EA4900B97FD9 /* Views */,
+				FBC8350C2D95F90600F3654B /* OpenWeather */,
 			);
 			name = swiftChangemakers;
 			packageProductDependencies = (

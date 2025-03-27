@@ -23,8 +23,14 @@ struct Tabview: View {
         TabView {
             HomeView()
                 .tabItem {
-                    Image(systemName: "house.fill")
+                    Image(systemName: "leaf.fill")
                     Text("Home")
+                }
+            
+            NewsView()
+                .tabItem {
+                    Image(systemName: "newspaper.fill")
+                    Text("News")
                 }
             
             UserView()
