@@ -10,8 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Tabview()
-                        .navigationBarBackButtonHidden(true)
+            Tabview().navigationBarBackButtonHidden(true)
         }
         
     }
@@ -33,17 +32,19 @@ struct Tabview: View {
                     Text("News")
                 }
             
+            ForumsView()
+                .tabItem {
+                    Image(systemName: "exclamationmark.bubble.fill")
+                    Text("Forums")
+                }
+            
             UserView()
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("User")
                 }
             
-            SettingsView()
-                .tabItem {
-                    Image(systemName: "gearshape.fill")
-                    Text("Settings")
-                }
+            
             
         }
     }

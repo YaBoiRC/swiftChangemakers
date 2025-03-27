@@ -72,6 +72,7 @@ struct NewsView: View {
                             .frame(width: 250, height: 150)
                             .background(
                                 RoundedRectangle(cornerRadius: 15)
+                                
                                     .fill(Color.green)
                                     .shadow(radius: 5)
                             )
@@ -115,6 +116,7 @@ struct NewsView: View {
             return "Desconocida"
         }
     }
+    
 }
 
 #Preview {

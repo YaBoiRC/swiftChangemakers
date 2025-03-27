@@ -1,24 +1,24 @@
 //
-//  SettingsView.swift
+//  ForumsView.swift
 //  swiftChangemakers
 //
-//  Created by Alumno on 26/03/25.
+//  Created by Alumno on 27/03/25.
 //
 
 import SwiftUI
 
-struct SettingsView: View {
+struct ForumsView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("Settings")
+                Text("Forums")
                 // Contenido de la vista de usuario
             }
-            .navigationTitle("Settings")
+            .navigationTitle("Forums")
         }
     }
 }
 
 #Preview {
-    SettingsView()
+    ForumsView()
 }
