@@ -13,7 +13,7 @@ struct NewsView: View {
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
-                Text("Noticias en Monterrey")
+                Text("Condición Climática")
                     .font(.title)
                     .padding(.horizontal)
                     .padding(.top)
@@ -65,7 +65,7 @@ struct NewsView: View {
                                     .font(.subheadline)
                                     .foregroundColor(.white)
                                 Text(aqiDescription(for: aqiValue))
-                                    .font(.caption)
+                                    .font(.subheadline)
                                     .foregroundColor(.white)
                             }
                             .padding()
