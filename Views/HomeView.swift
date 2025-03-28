@@ -14,7 +14,21 @@ struct HomeView: View {
     @StateObject var viewModel = NewsViewModel()
     
     var body: some View {
+        /*HStack{
+            HStack(alignment: .firstTextBaseline, spacing: 0.0){
+                
+                Text("Today").font(.largeTitle).fontWeight(.bold).padding(.horizontal, 5)
+                
+                Text(formattedDate  ).font(.subheadline).fontWeight(.medium).foregroundColor(.gray).bold()
+                
+                
+            }
+            Spacer()
+        }.padding(16)
+        */
+        
         NavigationView {
+            
             ScrollView(.vertical, showsIndicators: false){
             
                 VStack {
@@ -28,7 +42,7 @@ struct HomeView: View {
                         Text("25 C°")
                         Text("-")
                         Text("Algo Mas")
-                    }.padding(.top, 50)
+                    }.padding(.top, 30)
                     
                     
                     //MAPA
@@ -101,43 +115,30 @@ struct HomeView: View {
                             .padding(.horizontal, 20).padding(.top, 20)
                     }
                     
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                     Spacer(minLength: 0)
                     
                 }
                 // Contenido de la vista de usuario
                 
+            }.toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    HStack {
+                        Text("Today")
+                            .font(.largeTitle)
+                            .fontWeight(.bold).padding(.bottom, 40).padding(.top, 30)
+                        Text(formattedDate)
+                            .font(.subheadline)
+                            .foregroundColor(Color.primary.opacity(0.6)).bold().padding(.bottom, 30).padding(.top, 30)
+                    }
+                }
             }
-            .navigationTitle("Today (dia/mes/año)")
         }
     }
+    var formattedDate: String {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "EEEE, MMMM d"
+            return formatter.string(from: Date()).capitalized
+        }
 }
 
 #Preview {

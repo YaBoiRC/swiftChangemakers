@@ -40,6 +40,12 @@ struct Tabview: View {
             
             UserView()
                 .tabItem {
+                    Image(systemName: "bag.fill")
+                    Text("Market")
+                }
+            
+            UserView()
+                .tabItem {
                     Image(systemName: "person.fill")
                     Text("User")
                 }
