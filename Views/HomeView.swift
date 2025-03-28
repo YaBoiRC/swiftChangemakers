@@ -78,7 +78,7 @@ struct HomeView: View {
                     
                     
                     //MENU CARRUSEL
-                    ScrollView(.horizontal, showsIndicators: true)
+                    ScrollView(.horizontal, showsIndicators: false)
                     {
                         
                         HStack{

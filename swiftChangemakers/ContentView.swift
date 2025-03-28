@@ -17,9 +17,12 @@ struct ContentView: View {
 }
 
 struct Tabview: View {
+    
     var body: some View {
         
+        
         TabView {
+            
             HomeView()
                 .tabItem {
                     Image(systemName: "house.fill")
@@ -38,7 +41,7 @@ struct Tabview: View {
                     Text("Forums")
                 }
             
-            UserView()
+            MarketView()
                 .tabItem {
                     Image(systemName: "bag.fill")
                     Text("Market")
@@ -53,7 +56,9 @@ struct Tabview: View {
             
             
         }
+        
     }
+    
 }
 
 #Preview {

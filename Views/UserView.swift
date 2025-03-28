@@ -11,10 +11,10 @@ struct UserView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("User")
+                Text("Forums")
                 // Contenido de la vista de usuario
             }
-            .navigationTitle("User")
+            .navigationTitle("Forums")
         }
     }
 }

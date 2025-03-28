@@ -70,6 +70,11 @@
 			path = Location;
 			sourceTree = "<group>";
 		};
+		FBC835DA2D968FFE00F3654B /* SideBar */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SideBar;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +106,7 @@
 		39DFBB392D93D9F80017431C = {
 			isa = PBXGroup;
 			children = (
+				FBC835DA2D968FFE00F3654B /* SideBar */,
 				FBC835A32D96826F00F3654B /* Location */,
 				FBC8359E2D96537200F3654B /* Button */,
 				FBC8351E2D962E2900F3654B /* APIs */,
@@ -152,6 +158,7 @@
 				FBC8351E2D962E2900F3654B /* APIs */,
 				FBC8359E2D96537200F3654B /* Button */,
 				FBC835A32D96826F00F3654B /* Location */,
+				FBC835DA2D968FFE00F3654B /* SideBar */,
 			);
 			name = swiftChangemakers;
 			packageProductDependencies = (
