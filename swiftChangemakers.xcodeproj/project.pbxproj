@@ -80,6 +80,11 @@
 			path = MarketCategories;
 			sourceTree = "<group>";
 		};
+		FBC835E52D974ECE00F3654B /* MarketBusiness */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MarketBusiness;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +116,7 @@
 		39DFBB392D93D9F80017431C = {
 			isa = PBXGroup;
 			children = (
+				FBC835E52D974ECE00F3654B /* MarketBusiness */,
 				FBC835E42D974B7200F3654B /* MarketCategories */,
 				FBC835DA2D968FFE00F3654B /* SideBar */,
 				FBC835A32D96826F00F3654B /* Location */,
@@ -166,6 +172,7 @@
 				FBC835A32D96826F00F3654B /* Location */,
 				FBC835DA2D968FFE00F3654B /* SideBar */,
 				FBC835E42D974B7200F3654B /* MarketCategories */,
+				FBC835E52D974ECE00F3654B /* MarketBusiness */,
 			);
 			name = swiftChangemakers;
 			packageProductDependencies = (

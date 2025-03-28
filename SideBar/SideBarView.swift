@@ -29,7 +29,8 @@ struct SideBarView: View {
                 TabButton(title: "Tiendas de Ropa")
                 TabButton(title: "Talleres y Reparaciones")
                 TabButton(title: "Servicios Creativos")
-                TabButton(title: "Servicios de limpieza")
+                TabButton(title: "Servicios de Limpieza")
+                TabButton(title: "Huertos e Hibernaderos")
                 
                 Divider()
                 

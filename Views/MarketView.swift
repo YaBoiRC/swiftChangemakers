@@ -16,12 +16,44 @@ struct MarketView: View {
                 ScrollView{
                     VStack {
                         Text("Patrocinado")
-                            .font(.title)
+                            .font(.title2)
                             .padding()
                         Spacer()
                     }
+                    Divider()
                     VStack{
-                        Text("h")
+                        BusinessCardView(
+                            backgroundImage: Image("Bazares"),
+                            logoImage: Image("Bazar logo"),
+                            name: "Bazar del Mercado",
+                            description: "Ven y descubre lo mejor de la ciudad",
+                            contact: "Tel: 555-1234"
+                        ).padding(.top, 10)
+                        
+                        BusinessCardView(
+                            backgroundImage: Image("Coffee Shop"),
+                            logoImage: Image("Coffee Shop Logo"),
+                            name: "Cafetería Local",
+                            description: "Despiértate con nuestro exquisito espresso",
+                            contact: "Tel: 555-1234"
+                        ).padding(.top, 10)
+                        
+                        BusinessCardView(
+                            backgroundImage: Image("Cleaning Service"),
+                            logoImage: Image("Cleaning Logo"),
+                            name: "Limpieza",
+                            description: "En menos de 5 horas tu casa estará limpia.",
+                            contact: "Tel: 555-1234"
+                        ).padding(.top, 10)
+                        
+                        BusinessCardView(
+                            backgroundImage: Image("Local Restaurant"),
+                            logoImage: Image("Mr Kebabs"),
+                            name: "Restaurante Kebabs",
+                            description: "Comida tradicional con un toque moderno.",
+                            contact: "Tel: 555-1234"
+                        ).padding(.top, 10)
+                        
                     }
                 }
                 .navigationBarTitle("Market")
