@@ -86,6 +86,7 @@ extension View {
     }
 }
 
+
 #Preview {
     SideMenu(showMenu: .constant(true))
 }

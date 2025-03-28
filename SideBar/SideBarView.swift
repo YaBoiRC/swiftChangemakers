@@ -17,8 +17,11 @@ extension View {
 // Sidebar con el diseño solicitado
 struct SideBarView: View {
     var body: some View {
+        
         ScrollView(.vertical, showsIndicators: false) {
+            
             VStack(alignment: .leading, spacing: 20) {
+                
                 Text("Negocios Locales")
                     .bold()
                     .font(.title)
@@ -61,7 +64,7 @@ struct SideBarView: View {
     }
     
     @ViewBuilder
-    func TabButton(title: String) -> some View {
+    func TabButton(title: String, destination: AnyView? = nil) -> some View {
         Button {
             // Acción del botón
         } label: {

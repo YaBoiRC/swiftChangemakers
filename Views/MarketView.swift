@@ -52,7 +52,7 @@ struct MarketView: View {
                             name: "Restaurante Kebabs",
                             description: "Comida tradicional con un toque moderno.",
                             contact: "Tel: 555-1234"
-                        ).padding(.top, 10)
+                        ).padding(.top, 10).padding(.bottom, 10)
                         
                     }
                 }

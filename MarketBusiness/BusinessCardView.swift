@@ -25,7 +25,7 @@ struct BusinessCardView: View {
                 .clipped()
             
             // Gradiente para mejorar la legibilidad del texto
-            LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0.9), Color.clear]),
+            LinearGradient(gradient: Gradient(colors: [Color.black.opacity(1), Color.clear]),
                            startPoint: .bottom,
                            endPoint: .center)
                 .frame(height: 200)
