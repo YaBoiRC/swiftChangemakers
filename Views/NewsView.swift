@@ -88,14 +88,24 @@ struct NewsView: View {
                     }
                     .padding(.horizontal)
                 }
+                Text("Artículos recientes").font(.title)
+                    .padding(.horizontal)
+                    .padding(.top)
                 
                 Spacer()
+                
             }
             .navigationTitle("News")
             .onAppear {
                 viewModel.fetchData()
             }
+            
+            
+                
         }
+        
+    
+        
     }
     
     // Función auxiliar para obtener la descripción del AQI
@@ -118,7 +128,7 @@ struct NewsView: View {
     
     // Función que interpola un color entre verde (buena calidad) y rojo (mala calidad)
         private func colorForAQI(_ aqi: Int) -> Color {
-            // Normalizamos el valor: 1 -> 0.0, 5 -> 1.0
+            
             if aqi == 1 || aqi == 2 {
                 return .green
             }

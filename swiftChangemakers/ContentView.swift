@@ -34,7 +34,7 @@ struct Tabview: View {
             
             ForumsView()
                 .tabItem {
-                    Image(systemName: "exclamationmark.bubble.fill")
+                    Image(systemName: "bubble.left.and.exclamationmark.bubble.right.fill")
                     Text("Forums")
                 }
             
