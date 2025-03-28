@@ -22,7 +22,7 @@ struct Tabview: View {
         TabView {
             HomeView()
                 .tabItem {
-                    Image(systemName: "leaf.fill")
+                    Image(systemName: "house.fill")
                     Text("Home")
                 }
             
