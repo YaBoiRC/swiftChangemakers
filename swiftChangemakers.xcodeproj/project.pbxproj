@@ -65,6 +65,11 @@
 			path = Button;
 			sourceTree = "<group>";
 		};
+		FBC835A32D96826F00F3654B /* Location */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Location;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +101,7 @@
 		39DFBB392D93D9F80017431C = {
 			isa = PBXGroup;
 			children = (
+				FBC835A32D96826F00F3654B /* Location */,
 				FBC8359E2D96537200F3654B /* Button */,
 				FBC8351E2D962E2900F3654B /* APIs */,
 				FB48E1A92D93EA4900B97FD9 /* Views */,
@@ -145,6 +151,7 @@
 				FB48E1A92D93EA4900B97FD9 /* Views */,
 				FBC8351E2D962E2900F3654B /* APIs */,
 				FBC8359E2D96537200F3654B /* Button */,
+				FBC835A32D96826F00F3654B /* Location */,
 			);
 			name = swiftChangemakers;
 			packageProductDependencies = (
@@ -435,6 +442,7 @@
 				DEVELOPMENT_TEAM = V3624N3CCV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Esta aplicación utiliza tu ubicación para mostrar información relevante basada en tu posición";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -464,6 +472,7 @@
 				DEVELOPMENT_TEAM = V3624N3CCV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Esta aplicación utiliza tu ubicación para mostrar información relevante basada en tu posición";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -12,45 +12,68 @@ import WeatherKit
 struct HomeView: View {
     
     @StateObject var viewModel = NewsViewModel()
+    @StateObject private var locationManager = LocationManager()
+    
+    var greeting: String {
+        let hour = Calendar.current.component(.hour, from: Date())
+        switch hour {
+        case 6..<12:
+            return "Buenos días ☀️"
+        case 12..<20:
+            return "Buenas tardes 🌇"
+        default:
+            return "Buenas noches 🌙"
+        }
+    }
     
     var body: some View {
         /*HStack{
-            HStack(alignment: .firstTextBaseline, spacing: 0.0){
-                
-                Text("Today").font(.largeTitle).fontWeight(.bold).padding(.horizontal, 5)
-                
-                Text(formattedDate  ).font(.subheadline).fontWeight(.medium).foregroundColor(.gray).bold()
-                
-                
-            }
-            Spacer()
-        }.padding(16)
-        */
+         HStack(alignment: .firstTextBaseline, spacing: 0.0){
+         
+         Text("Today").font(.largeTitle).fontWeight(.bold).padding(.horizontal, 5)
+         
+         Text(formattedDate  ).font(.subheadline).fontWeight(.medium).foregroundColor(.gray).bold()
+         
+         
+         }
+         Spacer()
+         }.padding(16)
+         */
         
         NavigationView {
             
             ScrollView(.vertical, showsIndicators: false){
-            
+                
                 VStack {
                     
                     
-                    //DATOS GENERALES DEL DIA
-                    HStack
-                    {
-                        Text("HORA 12HR")
-                        Text("-")
-                        Text("25 C°")
-                        Text("-")
-                        Text("Algo Mas")
-                    }.padding(.top, 30)
-                    
+                    /*DATOS GENERALES DEL DIA
+                     HStack
+                     {
+                     Text("HORA 12HR")
+                     Text("-")
+                     Text("25 C°")
+                     Text("-")
+                     Text("Algo Mas")
+                     }.padding(.top, 30)
+                     */
                     
                     //MAPA
-                    Map().frame(width: 350, height: 350).cornerRadius(25)
+                    VStack(alignment: .leading){
+                        Text(greeting)
+                            .font(.title)
+                            .padding(.top, 20).padding(.leading,30)
+                        
+                        NavigationView {
+                            Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
+                                .edgesIgnoringSafeArea(.all).frame(width: 350, height: 350).cornerRadius(25)
+                        }
+                        
+                    }
                     
                     
                     //LOLOLOLOLOLOLOLOL
-                    Text("LOLOLOLOLOLOLOLOLOL")
+                    //Text("LOLOLOLOLOLOLOLOLOL")
                     
                     
                     
@@ -135,10 +158,10 @@ struct HomeView: View {
         }
     }
     var formattedDate: String {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "EEEE, MMMM d"
-            return formatter.string(from: Date()).capitalized
-        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMMM d"
+        return formatter.string(from: Date()).capitalized
+    }
 }
 
 #Preview {
