@@ -15,8 +15,8 @@ struct MarketView: View {
             NavigationView {
                 ScrollView{
                     VStack {
-                        Text("Contenido del Mercado")
-                            .font(.largeTitle)
+                        Text("Patrocinado")
+                            .font(.title)
                             .padding()
                         Spacer()
                     }
