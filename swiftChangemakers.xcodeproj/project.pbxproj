@@ -50,14 +50,9 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		FBC8350C2D95F90600F3654B /* OpenWeather */ = {
+		FBC8351E2D962E2900F3654B /* APIs */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = OpenWeather;
-			sourceTree = "<group>";
-		};
-		FBC835142D9613A200F3654B /* News */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = News;
+			path = APIs;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -90,8 +85,7 @@
 		39DFBB392D93D9F80017431C = {
 			isa = PBXGroup;
 			children = (
-				FBC835142D9613A200F3654B /* News */,
-				FBC8350C2D95F90600F3654B /* OpenWeather */,
+				FBC8351E2D962E2900F3654B /* APIs */,
 				FB48E1A92D93EA4900B97FD9 /* Views */,
 				39DFBB442D93D9F80017431C /* swiftChangemakers */,
 				39DFBB552D93D9FB0017431C /* swiftChangemakersTests */,
@@ -128,8 +122,7 @@
 			fileSystemSynchronizedGroups = (
 				39DFBB442D93D9F80017431C /* swiftChangemakers */,
 				FB48E1A92D93EA4900B97FD9 /* Views */,
-				FBC8350C2D95F90600F3654B /* OpenWeather */,
-				FBC835142D9613A200F3654B /* News */,
+				FBC8351E2D962E2900F3654B /* APIs */,
 			);
 			name = swiftChangemakers;
 			packageProductDependencies = (
