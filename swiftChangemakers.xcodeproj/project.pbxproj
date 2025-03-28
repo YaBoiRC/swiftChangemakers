@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FB401F1C2D96457E001C2C30 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB401F1B2D96457E001C2C30 /* MapKit.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		39DFBB532D93D9FB0017431C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		39DFBB422D93D9F80017431C /* swiftChangemakers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftChangemakers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39DFBB522D93D9FB0017431C /* swiftChangemakersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = swiftChangemakersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		39DFBB5C2D93D9FB0017431C /* swiftChangemakersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = swiftChangemakersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB401F1B2D96457E001C2C30 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -62,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB401F1C2D96457E001C2C30 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +96,7 @@
 				39DFBB442D93D9F80017431C /* swiftChangemakers */,
 				39DFBB552D93D9FB0017431C /* swiftChangemakersTests */,
 				39DFBB5F2D93D9FB0017431C /* swiftChangemakersUITests */,
+				FB401F1A2D96457E001C2C30 /* Frameworks */,
 				39DFBB432D93D9F80017431C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,6 +109,14 @@
 				39DFBB5C2D93D9FB0017431C /* swiftChangemakersUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FB401F1A2D96457E001C2C30 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB401F1B2D96457E001C2C30 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
