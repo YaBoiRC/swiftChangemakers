@@ -20,6 +20,9 @@ struct MarketView: View {
                             .padding()
                         Spacer()
                     }
+                    VStack{
+                        Text("h")
+                    }
                 }
                 .navigationBarTitle("Market")
                 .navigationBarItems(leading: Button(action: {

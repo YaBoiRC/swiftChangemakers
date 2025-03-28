@@ -74,11 +74,11 @@ struct SideBarView: View {
             .padding()
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.white)
+                    .fill(Color.primary.opacity(0.1))
                     .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
             )
         }
-        .foregroundColor(.primary)
+        .foregroundColor(.black)
     }
 }
 
