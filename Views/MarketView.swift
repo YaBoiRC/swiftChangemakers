@@ -13,11 +13,13 @@ struct MarketView: View {
     var body: some View {
         ZStack {
             NavigationView {
-                VStack {
-                    Text("Contenido del Mercado")
-                        .font(.largeTitle)
-                        .padding()
-                    Spacer()
+                ScrollView{
+                    VStack {
+                        Text("Contenido del Mercado")
+                            .font(.largeTitle)
+                            .padding()
+                        Spacer()
+                    }
                 }
                 .navigationBarTitle("Market")
                 .navigationBarItems(leading: Button(action: {
