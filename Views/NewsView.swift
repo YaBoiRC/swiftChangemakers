@@ -72,8 +72,7 @@ struct NewsView: View {
                             .frame(width: 250, height: 150)
                             .background(
                                 RoundedRectangle(cornerRadius: 15)
-                                
-                                    .fill(Color.green)
+                                    .fill(colorForAQI(aqiValue))
                                     .shadow(radius: 5)
                             )
                         } else {
@@ -116,6 +115,22 @@ struct NewsView: View {
             return "Desconocida"
         }
     }
+    
+    // Función que interpola un color entre verde (buena calidad) y rojo (mala calidad)
+        private func colorForAQI(_ aqi: Int) -> Color {
+            // Normalizamos el valor: 1 -> 0.0, 5 -> 1.0
+            if aqi == 1 || aqi == 2 {
+                return .green
+            }
+            if aqi == 3 || aqi == 4{
+                return .orange
+            }
+            if aqi == 5{
+                return .red
+            }
+            
+            return .green
+        }
     
 }
 
