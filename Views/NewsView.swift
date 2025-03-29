@@ -26,7 +26,7 @@ struct NewsView: View {
                             if let weather = viewModel.weather {
                                 let celsius = weather.main.temp - 273.15
                                 VStack(alignment: .leading, spacing: 8) {
-                                    Text("Clima en Monterrey")
+                                    Text("Clima en Monterrey \(emojiForWeather(description: weather.weather.first?.description ?? ""))")
                                         .font(.headline)
                                         .foregroundColor(.white)
                                     Text("Temp: \(String(format: "%.1f", celsius))°C")
@@ -37,6 +37,8 @@ struct NewsView: View {
                                             .font(.subheadline)
                                             .foregroundColor(.white)
                                     }
+                                    
+                                    
                                 }
                                 .padding()
                                 .frame(width: 250, height: 150)
@@ -169,6 +171,31 @@ struct NewsView: View {
         }
         
         return .green
+    }
+    
+    private func emojiForWeather(description: String) -> String {
+        switch description.lowercased() {
+        case "cielo claro":
+            return "☀️" // Sol
+        case "pocas nubes":
+            return "🌤️" // Nubes dispersas
+        case "nubes dispersas":
+            return "⛅" // Nubes esparcidas
+        case "nubes rotas":
+            return "☁️" // Nubes rotas
+        case "lluvia ligera":
+            return "🌧️" // Lluvia ligera
+        case "lluvia":
+            return "🌦️" // Lluvia moderada
+        case "tormenta":
+            return "⛈️" // Tormenta
+        case "nieve":
+            return "❄️" // Nieve
+        case "neblina":
+            return "🌫️" // Neblina
+        default:
+            return "🌥️" // Clima desconocido
+        }
     }
 }
 
