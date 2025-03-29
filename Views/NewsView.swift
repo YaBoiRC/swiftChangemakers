@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct NewsView: View {
     @StateObject var viewModel = NewsViewModel()
@@ -22,7 +23,6 @@ struct NewsView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 20) {
-                            // Widget de Clima
                             if let weather = viewModel.weather {
                                 let celsius = weather.main.temp - 273.15
                                 VStack(alignment: .leading, spacing: 8) {
@@ -46,7 +46,6 @@ struct NewsView: View {
                                         .shadow(radius: 5)
                                 )
                             } else {
-                                // Estado de carga para clima
                                 RoundedRectangle(cornerRadius: 15)
                                     .fill(Color.gray.opacity(0.3))
                                     .frame(width: 250, height: 150)
@@ -56,7 +55,6 @@ struct NewsView: View {
                                     )
                             }
                             
-                            // Widget de Contaminación
                             if let pollution = viewModel.pollution {
                                 let aqiValue = pollution.list.first?.main.aqi ?? 0
                                 VStack(alignment: .leading, spacing: 8) {
@@ -78,7 +76,6 @@ struct NewsView: View {
                                         .shadow(radius: 5)
                                 )
                             } else {
-                                // Estado de carga para contaminación
                                 RoundedRectangle(cornerRadius: 15)
                                     .fill(Color.gray.opacity(0.3))
                                     .frame(width: 250, height: 150)
@@ -91,15 +88,47 @@ struct NewsView: View {
                         .padding(.horizontal)
                     }
                     
-                    Text("Artículos recientes").font(.title)
+                    Text("Artículos recientes")
+                        .font(.title)
                         .padding(.horizontal)
-                        .padding(.top)
-                    
-                    VStack(spacing:20){
-                        
+
+                    if viewModel.articulos.isEmpty {
+                        Text("Cargando artículos... \(viewModel.articulos.count) artículos cargados")
+                            .foregroundColor(.gray)
+                            .padding(.horizontal)
+                            .onAppear {
+                                viewModel.fetchNoticias()
+                            }
+                    } else {
+                        ForEach(viewModel.articulos) { articulo in
+                            VStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(Color.white)
+                                    .frame(height: 150)
+                                    .shadow(color: .gray, radius: 5, x: 0, y: 5)
+                                    .overlay(
+                                        VStack {
+                                            Text(articulo.titulo)
+                                                .font(.headline)
+                                                .foregroundColor(.black).bold()
+                                                .padding(.bottom, 5)
+                                            Text(articulo.descripcion)
+                                                .font(.subheadline)
+                                                .foregroundColor(.black)
+                                                .lineLimit(2)
+                                                .padding(.bottom, 5)
+                                        }
+                                        .padding()
+                                    )
+                                    .onTapGesture {
+                                        if let url = URL(string: articulo.url) {
+                                            UIApplication.shared.open(url)
+                                        }
+                                    }
+                            }
+                            .padding(.horizontal)
+                        }
                     }
-                    
-                    Spacer()
                     
                 }
             }
@@ -107,16 +136,9 @@ struct NewsView: View {
             .onAppear {
                 viewModel.fetchData()
             }
-            
-            
-                
         }
-        
-    
-        
     }
     
-    // Función auxiliar para obtener la descripción del AQI
     private func aqiDescription(for value: Int) -> String {
         switch value {
         case 1:
@@ -134,22 +156,20 @@ struct NewsView: View {
         }
     }
     
-    // Función que interpola un color entre verde (buena calidad) y rojo (mala calidad)
-        private func colorForAQI(_ aqi: Int) -> Color {
-            
-            if aqi == 1 || aqi == 2 {
-                return .green
-            }
-            if aqi == 3 || aqi == 4{
-                return .orange
-            }
-            if aqi == 5{
-                return .red
-            }
-            
+    private func colorForAQI(_ aqi: Int) -> Color {
+        
+        if aqi == 1 || aqi == 2 {
             return .green
         }
-    
+        if aqi == 3 || aqi == 4{
+            return .orange
+        }
+        if aqi == 5{
+            return .red
+        }
+        
+        return .green
+    }
 }
 
 #Preview {

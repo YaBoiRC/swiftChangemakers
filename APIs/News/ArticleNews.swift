@@ -1,14 +1,8 @@
-//
-//  ArticleNews.swift
-//  swiftChangemakers
-//
-//  Created by Alumno on 27/03/25.
-//
-
-//0c65fdd04c474542af0c39f2bba9bad8
-
 import SwiftUI
 import Combine
+import WeatherKit
+import CoreLocation
+import UIKit
 
 // Modelo para representar un artículo de noticias
 struct ArticuloNoticia: Identifiable, Decodable {
@@ -29,27 +23,39 @@ class NoticiasViewModel: ObservableObject {
     @Published var articulos: [ArticuloNoticia] = []
     private var cancellable: AnyCancellable?
     private var timerCancellable: AnyCancellable?
-
+    
     init() {
         fetchNoticias()
         configurarTemporizador()
     }
 
-    // Función para obtener noticias de la API
     func fetchNoticias() {
-        guard let url = URL(string: "https://newsapi.org/v2/everything?q=clima%20OR%20contaminación&apiKey=0c65fdd04c474542af0c39f2bba9bad8") else { return }
+        guard let url = URL(string: "https://newsapi.org/v2/everything?q=localidad%20OR%20eventos&apiKey=d8ce97eb4e7f467b84ce30895150db1e") else {
+            print("Invalid URL")
+            return
+        }
 
         cancellable = URLSession.shared.dataTaskPublisher(for: url)
-            .map { $0.data }
-            .decode(type: [ArticuloNoticia].self, decoder: JSONDecoder())
-            .replaceError(with: [])
+            .map { data, response in
+                if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
+                    print("Error: \(httpResponse.statusCode)") // Debugging
+                    return Data() // Return empty data if the response is not successful
+                }
+                return data
+            }
+            .decode(type: NewsAPIResponse.self, decoder: JSONDecoder())
+            .replaceError(with: NewsAPIResponse(articles: []))
             .receive(on: DispatchQueue.main)
-            .assign(to: \.articulos, on: self)
+            .sink { [weak self] response in
+                if response.articles.isEmpty {
+                    print("No articles found.")
+                } else {
+                    print("Loaded \(response.articles.count) articles.")
+                }
+                self?.articulos = response.articles
+            }
     }
-    
 
-
-    // Configurar un temporizador para actualizar las noticias cada hora
     private func configurarTemporizador() {
         timerCancellable = Timer.publish(every: 86400, on: .main, in: .common)
             .autoconnect()
@@ -59,23 +65,55 @@ class NoticiasViewModel: ObservableObject {
     }
 }
 
-// Vista que muestra la lista de artículos de noticias
 struct NoticiasView: View {
     @StateObject private var viewModel = NoticiasViewModel()
 
     var body: some View {
         NavigationView {
-            List(viewModel.articulos) { articulo in
-                VStack(alignment: .leading) {
-                    Text(articulo.titulo)
-                        .font(.headline)
-                    Text(articulo.descripcion)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-                .onTapGesture {
-                    if let url = URL(string: articulo.url) {
-                        UIApplication.shared.open(url)
+            ScrollView {
+                VStack(spacing: 20) {
+                    
+                    // Sección de Noticias
+                    Text("Artículos recientes")
+                        .font(.title)
+                        .padding(.horizontal)
+
+                    if viewModel.articulos.isEmpty {
+                        Text("Cargando artículos... \(viewModel.articulos.count) artículos cargados")
+                            .foregroundColor(.gray)
+                            .padding(.horizontal)
+                            .onAppear {
+                                // Trigger data fetch here if it isn't started yet
+                                viewModel.fetchNoticias()
+                            }
+                    } else {
+                        ForEach(viewModel.articulos) { articulo in
+                            VStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(Color.blue)
+                                    .frame(height: 150)
+                                    .overlay(
+                                        VStack {
+                                            Text(articulo.titulo)
+                                                .font(.headline)
+                                                .foregroundColor(.white)
+                                                .padding(.bottom, 5)
+                                            Text(articulo.descripcion)
+                                                .font(.subheadline)
+                                                .foregroundColor(.white)
+                                                .lineLimit(2)
+                                                .padding(.bottom, 5)
+                                        }
+                                        .padding()
+                                    )
+                                    .onTapGesture {
+                                        if let url = URL(string: articulo.url) {
+                                            UIApplication.shared.open(url)
+                                        }
+                                    }
+                            }
+                            .padding(.horizontal)
+                        }
                     }
                 }
             }
@@ -84,3 +122,6 @@ struct NoticiasView: View {
     }
 }
 
+struct NewsAPIResponse: Decodable {
+    let articles: [ArticuloNoticia]
+}
