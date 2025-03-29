@@ -14,13 +14,6 @@ struct MarketView: View {
         ZStack {
             NavigationView {
                 ScrollView{
-                    VStack {
-                        Text("Patrocinado")
-                            .font(.title2)
-                            .padding()
-                        Spacer()
-                    }
-                    Divider()
                     VStack{
                         BusinessCardView(
                             backgroundImage: Image("Bazares"),
@@ -28,7 +21,7 @@ struct MarketView: View {
                             name: "Bazar del Mercado",
                             description: "Ven y descubre lo mejor de la ciudad",
                             contact: "Tel: 555-1234"
-                        ).padding(.top, 10)
+                        ).padding(.top, 20)
                         
                         BusinessCardView(
                             backgroundImage: Image("Coffee Shop"),
@@ -56,7 +49,7 @@ struct MarketView: View {
                         
                     }
                 }
-                .navigationBarTitle("Market")
+                .navigationBarTitle("Patrocinado")
                 .navigationBarItems(leading: Button(action: {
                     withAnimation {
                         showSidebar.toggle()
