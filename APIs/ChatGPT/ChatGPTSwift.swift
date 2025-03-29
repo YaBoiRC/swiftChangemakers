@@ -10,7 +10,7 @@ import ChatGPTSwift
 import OpenAIKit
 
 struct ContentView: View {
-    // Inicializamos el API manager (asegúrate de no exponer la clave en producción)
+    // Inicializamos el API manager
     let api = ChatGPTAPI(apiKey: "API_KEY")
     
     @State private var userInput = ""

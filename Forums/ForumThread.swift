@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// MARK: - Modelos de Datos
-
 // Enum para representar las secciones del foro
 enum ForumSection: String, CaseIterable, Identifiable {
     var id: String { rawValue }

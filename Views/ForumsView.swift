@@ -7,51 +7,67 @@
 
 import SwiftUI
 
-// Vista principal de Foros con botón “+” en la barra
-// Vista principal de Foros con selección de secciones
 struct ForumsView: View {
     @State private var selectedSection: ForumSection = .todos
-    @State private var showAddForum = false
+    @State private var showAddForum: Bool = false
+    @State private var forumThreads: [ForumThread] = sampleThreads
     
     // Filtra los hilos según la sección seleccionada
     var filteredThreads: [ForumThread] {
         if selectedSection == .todos {
-            return sampleThreads
+            return forumThreads
         } else {
-            return sampleThreads.filter { $0.section == selectedSection }
+            return forumThreads.filter { $0.section == selectedSection }
         }
     }
     
     var body: some View {
-        NavigationView {
-            VStack {
-                // Reemplazamos el Picker por nuestro HorizontalCategoryPicker
-                                HorizontalCategoryPicker(selectedCategory: $selectedSection)
-                                    .padding(.top)
+        NavigationStack {
+            ZStack {
+                // Fondo degradado sutil para dar personalidad
+                LinearGradient(gradient: Gradient(colors: [Color(.systemGray6), Color.white]),
+                               startPoint: .top,
+                               endPoint: .bottom)
+                    .ignoresSafeArea()
                 
-                List {
-                    ForEach(filteredThreads) { thread in
-                        ForumRow(thread: thread)
+                VStack {
+                    HorizontalCategoryPicker(selectedCategory: $selectedSection)
+                        .padding(.top)
+                    
+                    List {
+                        ForEach(filteredThreads) { thread in
+                            ForumRow(thread: thread)
+                                .listRowBackground(Color.clear)
+                        }
                     }
+                    .listStyle(PlainListStyle())
                 }
-                .listStyle(PlainListStyle())
             }
             .navigationTitle("Foros")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        withAnimation { showAddForum.toggle() }
-                    }, label: {
+                    Button {
+                        withAnimation {
+                            showAddForum = true
+                        }
+                    } label: {
                         Image(systemName: "plus.circle.fill")
-                    })
+                            .imageScale(.large)
+                            .foregroundColor(.blue)
+                    }
                 }
             }
             .sheet(isPresented: $showAddForum) {
-                AddForumView()
+                // Al guardar, se agrega el nuevo hilo a forumThreads
+                AddForumView { newThread in
+                    forumThreads.append(newThread)
+                }
             }
         }
     }
 }
+
+
 
 #Preview {
     ForumsView()

@@ -7,70 +7,101 @@
 
 import SwiftUI
 
-// Vista de detalle para un hilo seleccionado
 struct ForumDetailView: View {
     @State var thread: ForumThread
     @State private var newComment = ""
     
     var body: some View {
-        VStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    Text(thread.title)
-                        .font(.largeTitle)
-                        .bold()
-                    HStack {
-                        Text("Por \(thread.author)")
-                            .foregroundColor(.gray)
-                        Spacer()
-                        Text(thread.date)
-                            .foregroundColor(.gray)
-                    }
-                    Divider()
-                    Text("Contenido completo del hilo... (contenido simulado)")
-                        .font(.body)
-                    Divider()
-                    Text("Comentarios")
-                        .font(.headline)
-                    ForEach(thread.comments) { comment in
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Text(comment.author)
-                                    .font(.subheadline)
-                                    .bold()
-                                Spacer()
-                                Text(comment.date)
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                            }
-                            Text(comment.content)
-                                .font(.body)
-                                .padding(.vertical, 4)
+        ZStack {
+            // Fondo degradado elegante
+            LinearGradient(gradient: Gradient(colors: [Color.white, Color(.systemGray6)]),
+                           startPoint: .top,
+                           endPoint: .bottom)
+                .ignoresSafeArea()
+            
+            VStack {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text(thread.title)
+                            .font(.system(size: 34, weight: .bold, design: .rounded))
+                            .foregroundColor(.primary)
+                        
+                        HStack {
+                            Text("Por \(thread.author)")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            Spacer()
+                            Text(thread.date)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
                         }
-                        .padding()
-                        .background(Color.gray.opacity(0.1))
-                        .cornerRadius(8)
+                        
+                        Divider()
+                        
+                        Text("Contenido completo del hilo...")
+                            .font(.body)
+                            .foregroundColor(.primary)
+                        
+                        Divider()
+                        
+                        Text("Comentarios")
+                            .font(.title2)
+                            .bold()
+                            .foregroundColor(.primary)
+                        
+                        ForEach(thread.comments) { comment in
+                            VStack(alignment: .leading, spacing: 8) {
+                                HStack {
+                                    Text(comment.author)
+                                        .font(.subheadline)
+                                        .bold()
+                                        .foregroundColor(.blue)
+                                    Spacer()
+                                    Text(comment.date)
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                }
+                                Text(comment.content)
+                                    .font(.body)
+                                    .foregroundColor(.primary)
+                            }
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(12)
+                            .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+                        }
                     }
+                    .padding()
+                }
+                
+                // Área para agregar nuevo comentario
+                HStack {
+                    TextField("Agrega un comentario...", text: $newComment)
+                        .padding(12)
+                        .background(Color(.systemGray5))
+                        .cornerRadius(10)
+                    
+                    Button(action: {
+                        withAnimation {
+                            let comment = Comment(id: thread.comments.count + 1,
+                                                  author: "Tú",
+                                                  content: newComment,
+                                                  date: "Hoy")
+                            thread.comments.append(comment)
+                            newComment = ""
+                        }
+                    }, label: {
+                        Text("Enviar")
+                            .fontWeight(.bold)
+                            .padding(.vertical, 10)
+                            .padding(.horizontal, 16)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    })
                 }
                 .padding()
             }
-            // Sección para agregar un nuevo comentario
-            HStack {
-                TextField("Agrega un comentario...", text: $newComment)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                Button(action: {
-                    // Añadir el comentario a thread.comments
-                    let comment = Comment(id: thread.comments.count + 1,
-                                          author: "Tú",
-                                          content: newComment,
-                                          date: "Hoy")
-                    thread.comments.append(comment)
-                    newComment = ""
-                }, label: {
-                    Text("Enviar")
-                })
-            }
-            .padding()
         }
         .navigationTitle("Detalle")
         .navigationBarTitleDisplayMode(.inline)
