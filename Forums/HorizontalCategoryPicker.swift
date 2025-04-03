@@ -9,9 +9,11 @@ import SwiftUI
 struct HorizontalCategoryPicker: View {
     @Binding var selectedCategory: ForumSection
 
+    // Seccion de categorias horizontal que usamos en ambos ForumsView y MarketView
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 12) {
+                // Un estilo para todo filtro especifico
                 ForEach(ForumSection.allCases) { section in
                     Text(section.rawValue)
                         .font(.subheadline)

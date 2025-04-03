@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Revista del usuario, base sistema de estrellas 1 al 5
 struct RatingView: View {
     @Binding var rating: Int
     var maximumRating = 5

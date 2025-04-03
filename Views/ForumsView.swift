@@ -24,16 +24,12 @@ struct ForumsView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // Fondo degradado sutil para dar personalidad
-                LinearGradient(gradient: Gradient(colors: [Color(.systemGray6), Color.white]),
-                               startPoint: .top,
-                               endPoint: .bottom)
-                    .ignoresSafeArea()
                 
                 VStack {
                     HorizontalCategoryPicker(selectedCategory: $selectedSection)
                         .padding(.top)
                     
+                    // Por si hay filtro, regresa ello seleccionado por categoria
                     List {
                         ForEach(filteredThreads) { thread in
                             ForumRow(thread: thread)
@@ -43,8 +39,10 @@ struct ForumsView: View {
                     .listStyle(PlainListStyle())
                 }
             }
+            // Titulo de navegacion
             .navigationTitle("Foros")
             .toolbar {
+                // Boton de poder agregar un nuevo foro (showAddForum llamado)
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         withAnimation {

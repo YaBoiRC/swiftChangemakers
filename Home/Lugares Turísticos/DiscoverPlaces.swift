@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 
+// Estructura de las caracteristicas de los lugares turisticos
 struct DiscoverPlace: Identifiable {
     let id = UUID()
     let name: String

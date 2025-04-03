@@ -460,7 +460,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"swiftChangemakers/Preview Content\"";
-				DEVELOPMENT_TEAM = 534FGD64GF;
+				DEVELOPMENT_TEAM = V3624N3CCV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Esta aplicación utiliza tu ubicación para mostrar información relevante basada en tu posición";
@@ -475,7 +475,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = datFlowers.swiftChangemakers;
+				PRODUCT_BUNDLE_IDENTIFIER = raychavez.swiftChangemakers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -491,7 +491,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"swiftChangemakers/Preview Content\"";
-				DEVELOPMENT_TEAM = 534FGD64GF;
+				DEVELOPMENT_TEAM = V3624N3CCV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Esta aplicación utiliza tu ubicación para mostrar información relevante basada en tu posición";
@@ -506,7 +506,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = datFlowers.swiftChangemakers;
+				PRODUCT_BUNDLE_IDENTIFIER = raychavez.swiftChangemakers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

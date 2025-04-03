@@ -35,7 +35,7 @@ struct HomeView: View {
         }
     }
 
-    
+    // El mensaje de bienvenida dependiendo del tiempo del dia
     var greeting: String {
         let hour = Calendar.current.component(.hour, from: Date())
         switch hour {
@@ -48,6 +48,7 @@ struct HomeView: View {
         }
     }
     
+    // Fecha formateada para el inicio
     var formattedDate: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEE, MMMM d"
@@ -56,15 +57,15 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView(.vertical, showsIndicators: false) {
+            ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 20) {
-                    // Greeting Section
+                    // Bienvenida
                     Text(greeting)
                         .font(.title)
-                        .padding(.top, 20)
-                        .padding(.leading, 30)
+                        .bold()
+                        .padding(.top).padding(.horizontal)
                     
-                    // Map Section
+                    // Mapa
                     ZStack(alignment: .topTrailing) {
                         Map(coordinateRegion: $region,
                             showsUserLocation: true,
@@ -102,7 +103,7 @@ struct HomeView: View {
                         }
                     }
                     
-                    // Categories Section
+                    // Categorias
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 20) {
                             ForEach(categories) { category in
@@ -132,7 +133,8 @@ struct HomeView: View {
                         .padding(.top, 10)
                     }
                     
-                    // DESCUBRE Section (Carrusel con Parallax)
+                    // Descubre Lugares Turisticos (Carousel con Parallax
+                    // Checa primero que no este vacio los lugares de descubrir
                     if !discoverPlaces.isEmpty {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Descubre")
@@ -140,8 +142,10 @@ struct HomeView: View {
                                 .bold()
                                 .padding(.top).padding(.horizontal)
                             
+                            // Es un scroll view para poder las gesturas de scroll y mostrarlos horizontalmente
                             ScrollView(.horizontal, showsIndicators: false) {
                                 LazyHStack(spacing: 16) {
+                                    // hace una estructura para cada lugar turistico
                                     ForEach(discoverPlaces, id: \.id) { place in
                                         VStack(spacing: 0) {
                                             // Imagen con efecto parallax
@@ -181,7 +185,7 @@ struct HomeView: View {
                         }
                     }
                     
-                    // Tips Section
+                    // Sugerencias Seccion
                     VStack(alignment: .leading, spacing: 10) {
                         Text("Consejos para ti en \(city)")
                             .font(.title2)
@@ -224,6 +228,7 @@ struct HomeView: View {
         }
     }
     
+    // Consigue la ciudad y sugerencias, tenemos al momento de Monterrey y Guadalajara y unos Default visto en getTips
     private func fetchCityAndTips(from location: CLLocation) {
         let geocoder = CLGeocoder()
         geocoder.reverseGeocodeLocation(location) { placemarks, error in
@@ -236,6 +241,7 @@ struct HomeView: View {
         }
     }
     
+    // Sugerencias base a la ciudad (Monterrey, Guadalajara, Default)
     private func getTips(for city: String) -> [String] {
         switch city {
         case "Monterrey":
@@ -271,7 +277,7 @@ let sampleAnnotations: [AnnotationItem] = [
     // Example: AnnotationItem(name: "Parque Central", coordinate: CLLocationCoordinate2D(latitude: 25.6866, longitude: -100.3161))
 ]
 
-// Existing Category model and categories list
+// Structura para Categorias
 struct Category: Identifiable {
     let id = UUID()
     let name: String
@@ -291,7 +297,7 @@ let categories: [Category] = [
     Category(name: "Bomberos", icon: "flame.fill", searchType: "fire_man, fire_station, fire_men, fire, bomberos")
 ]
 
-// Your function to open Apple Maps (unchanged)
+// Funcion para poder abrir el Apple Maps
 func openInAppleMaps(coordinate: CLLocationCoordinate2D, name: String) {
     let placemark = MKPlacemark(coordinate: coordinate)
     let mapItem = MKMapItem(placemark: placemark)

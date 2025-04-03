@@ -19,6 +19,7 @@ struct AddForumView: View {
     var body: some View {
         NavigationStack {
             Form {
+                // Secciones para poder llenar las caracteristicas del foro por titulo, contenido y categoria
                 Section(header: Text("Título").font(.headline)) {
                     TextField("Ingresa el título", text: $title)
                 }

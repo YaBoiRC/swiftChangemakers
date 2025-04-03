@@ -14,6 +14,7 @@ struct BusinessAnnotation: Identifiable {
     let coordinate: CLLocationCoordinate2D
 }
 
+// Ubicacion para los diferentes negocios dentro del MarketView
 struct BusinessLocationMapView: View {
     var coordinate: CLLocationCoordinate2D
     @State private var region: MKCoordinateRegion

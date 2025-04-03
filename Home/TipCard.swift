@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Estructura para las sugerencias que le damos al usuario
 struct TipCard: View {
     let tip: String
     
@@ -25,6 +26,7 @@ struct TipCard: View {
     }
 }
 
+// Ejemplo dandole texto de "hola"
 #Preview {
     TipCard(tip: "hola")
 }

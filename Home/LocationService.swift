@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 
+// Servicios de ubicacion que reconocemos dentro de CustomLocationManager
 class LocationService {
     private let locationManager = CLLocationManager()
 

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct UserView: View {
+    // Cargamos el usuario base el AppStorage y su informacion basica
     @AppStorage("username") private var username = "Juan451"
     @State private var email = "juanpersonal123@gmail.com"
     @State private var selectedColor: Color = .blue
@@ -15,6 +16,7 @@ struct UserView: View {
     var body: some View {
         NavigationView {
             List {
+                // Informacion del usuario
                 Section(header: Text("User Information")) {
                     HStack {
                         Image(systemName: "person.circle.fill")
@@ -23,6 +25,7 @@ struct UserView: View {
                             .frame(width: 40, height: 40)
                             .foregroundColor(selectedColor)
                             .offset(y: 3)
+                        // Despliegua el usuario y su correo electronico
                         Text(username)
                             .font(.title)
                     }
@@ -32,6 +35,7 @@ struct UserView: View {
                 }
                 
                 Section {
+                    // Una tab para los ajustes
                     DisclosureGroup("Settings") {
                         SettingsView(selectedColor: $selectedColor)
                     }
@@ -42,6 +46,7 @@ struct UserView: View {
     }
 }
 
+// Ajustes para personalizacion del usuario
 struct SettingsView: View {
     @AppStorage("username") private var username: String = "Juan451"
     @State private var newUsername: String = ""
@@ -53,15 +58,15 @@ struct SettingsView: View {
             Text("Username")
                 .font(.title3)
             
-            
+            // Cambio de usuario
             TextField("Nuevo nombre de usuario", text: $newUsername)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-                .background(Color.white)
                 .cornerRadius(10)
                 .shadow(radius: 2)
 
-            
+            // Cambio de color de fondo
+            // No se permite cambiar la IMAGEN especificamente
             Text("Background Color")
                 .font(.title3)
             
@@ -80,12 +85,14 @@ struct SettingsView: View {
                 }
             }
             
+            // Checa que el usuario del textbox si tenga alguna letra para el usuario
             Button {
                 if !newUsername.isEmpty {
                     username = newUsername
                     newUsername = ""
                 }
             } label: {
+                // Boton para guardar cambios del usuario y fondo del icono
                 HStack {
                     Image(systemName: "checkmark.circle.fill")
                     Text("Guardar")

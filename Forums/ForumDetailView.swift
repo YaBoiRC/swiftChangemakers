@@ -13,12 +13,6 @@ struct ForumDetailView: View {
     
     var body: some View {
         ZStack {
-            // Fondo degradado elegante
-            LinearGradient(gradient: Gradient(colors: [Color.white, Color(.systemGray6)]),
-                           startPoint: .top,
-                           endPoint: .bottom)
-                .ignoresSafeArea()
-            
             VStack {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {

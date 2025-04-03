@@ -18,6 +18,7 @@ struct ReviewRow: View {
                     .fontWeight(.bold)
                 Spacer()
                 HStack(spacing: 2) {
+                    // Checa el numero de estrellas seleccionadas originalmente
                     ForEach(0..<5) { index in
                         Image(systemName: index < review.rating ? "star.fill" : "star")
                             .foregroundColor(index < review.rating ? .yellow : .gray)

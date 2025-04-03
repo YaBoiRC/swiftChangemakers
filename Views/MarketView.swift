@@ -23,19 +23,15 @@ struct MarketView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // Fondo degradado sofisticado
-                LinearGradient(gradient: Gradient(colors: [Color.white, Color(.systemGray6)]),
-                               startPoint: .top,
-                               endPoint: .bottom)
-                .ignoresSafeArea()
-                
                 VStack {
                     HorizontalPicker(selectedCategory: $selectedSection)
                         .padding(.top, 10)
                     
                     ScrollView {
                         LazyVStack(spacing: 16) {
+                            // Para mostrarlo por filtro por si hay uno
                             ForEach(filteredThreads, id: \.id) { thread in
+                                // Diseno de cada tarjeta o seccion de Market
                                 let cardView = thread
                                     .frame(height: 200)
                                     .background(
@@ -67,9 +63,11 @@ struct MarketView: View {
 
                 }
             }
+            // Titulo de navegacion para que aparezca arriba
             .navigationTitle("Market")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    // Boton para poder agregar un nuevo Market
                     Button {
                         withAnimation {
                             showAddBusiness = true
@@ -81,8 +79,11 @@ struct MarketView: View {
                     }
                 }
             }
+            // Un sheet para que el usuario pueda agregar su propio Market
             .sheet(isPresented: $showAddBusiness) {
                 AddBusinessView(isPresented: $showAddBusiness) { newBusiness in
+                    
+                    // Recibe imagen de fondo, imagen logo, con nombre, descripcion, contacto, seccion, ubicacion
                     let backgroundImage: Image
                     if let bg = newBusiness.backgroundUIImage {
                         backgroundImage = Image(uiImage: bg)
@@ -105,6 +106,7 @@ struct MarketView: View {
                         section: newBusiness.section,
                         coordinate: newBusiness.coordinate
                     )
+                    // Lo agrega al terminar
                     marketThreads.append(newBusinessCard)
                     
                 }

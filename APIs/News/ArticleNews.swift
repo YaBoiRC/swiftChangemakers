@@ -29,6 +29,8 @@ class NoticiasViewModel: ObservableObject {
         configurarTemporizador()
     }
 
+    // URL del API del NewsAPI
+    // Key: d8ce97eb4e7f467b84ce30895150db1e
     func fetchNoticias() {
         guard let url = URL(string: "https://newsapi.org/v2/everything?q=localidad%20OR%20eventos&apiKey=d8ce97eb4e7f467b84ce30895150db1e") else {
             print("Invalid URL")
@@ -39,14 +41,17 @@ class NoticiasViewModel: ObservableObject {
             .map { data, response in
                 if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
                     print("Error: \(httpResponse.statusCode)") // Debugging
-                    return Data() // Return empty data if the response is not successful
+                    return Data() // Regresamos datos vacios por si no carga correctamente
                 }
-                return data
+                return data // Si carga correctamente, cargamos los datos recibidos
             }
+            // Decodificamos el JSON que recibimos
             .decode(type: NewsAPIResponse.self, decoder: JSONDecoder())
+            // Llenamos el array vacio con los datos
             .replaceError(with: NewsAPIResponse(articles: []))
             .receive(on: DispatchQueue.main)
             .sink { [weak self] response in
+                // Cargamos los articulos, siendo si son vacios o si si cargaron
                 if response.articles.isEmpty {
                     print("No articles found.")
                 } else {
@@ -56,15 +61,18 @@ class NoticiasViewModel: ObservableObject {
             }
     }
 
+    // Temporizador para poder actualizar los articulos cada hora
     private func configurarTemporizador() {
         timerCancellable = Timer.publish(every: 86400, on: .main, in: .common)
             .autoconnect()
             .sink { [weak self] _ in
+                // Consigue los nuevos articulos por si hay
                 self?.fetchNoticias()
             }
     }
 }
 
+// Vista de noticias
 struct NoticiasView: View {
     @StateObject private var viewModel = NoticiasViewModel()
 
@@ -78,12 +86,13 @@ struct NoticiasView: View {
                         .font(.title)
                         .padding(.horizontal)
 
+                    // Si esta vacio, se reemplaza con texto de "cargando..."
                     if viewModel.articulos.isEmpty {
                         Text("Cargando artículos... \(viewModel.articulos.count) artículos cargados")
                             .foregroundColor(.gray)
                             .padding(.horizontal)
                             .onAppear {
-                                // Trigger data fetch here if it isn't started yet
+                               // Aqui empezamos el carga de noticias por si no previamente hecho
                                 viewModel.fetchNoticias()
                             }
                     } else {

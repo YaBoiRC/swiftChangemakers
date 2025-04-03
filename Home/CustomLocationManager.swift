@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 
+// Mapa principal que aparece en HomeView, usado para mostrar la area cercana del usuario base su ubicacion
 class CustomLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     private let geocoder = CLGeocoder()

@@ -8,17 +8,20 @@
 import SwiftUI
 import Combine
 
+// Aqui la mayoria maneja lo mismo que ArticleNews, aunque ArticleNews tiene structs para cosas
+// NewsViewModel maneja ambos aspectos, de clima y los articulos
+
 class NewsViewModel: ObservableObject {
     @Published var articulos: [ArticuloNoticia] = []
     @Published var weather: WeatherResponse?
     @Published var pollution: PollutionResponse?
     
-    private let apiKey = "fd344e3552018db1297c78e227d20814"  // Reemplaza con tu propia API Key
+    private let apiKey = "fd344e3552018db1297c78e227d20814"
     private let monterreyLat = 25.6866
     private let monterreyLon = -100.3161
     private var cancellable: AnyCancellable?
 
-    /// Descarga información del clima actual en Monterrey
+    // Descarga información del clima actual en Monterrey usando el API de OpenWeatherMap
     func fetchWeather() {
         let urlString = "https://api.openweathermap.org/data/2.5/weather?q=Monterrey,mx&appid=\(apiKey)&lang=es"
 
@@ -38,7 +41,7 @@ class NewsViewModel: ObservableObject {
         }.resume()
     }
     
-    /// Descarga información de la calidad del aire en Monterrey
+    // Descarga información de la calidad del aire en Monterrey
     func fetchPollution() {
         let urlString = "https://api.openweathermap.org/data/2.5/air_pollution?lat=\(monterreyLat)&lon=\(monterreyLon)&appid=\(apiKey)"
         
@@ -57,13 +60,13 @@ class NewsViewModel: ObservableObject {
         }.resume()
     }
     
-    /// Función para cargar ambas informaciones
+    // Función para cargar ambas informaciones
     func fetchData() {
         fetchWeather()
         fetchPollution()
     }
 
-    /// Funcion para cargar noticias
+    // Funcion para cargar noticias
     func fetchNoticias() {
         guard let url = URL(string: "https://newsapi.org/v2/everything?q=Monterrey&language=es&apiKey=d8ce97eb4e7f467b84ce30895150db1e") else {
             print("Invalid URL")
@@ -87,7 +90,7 @@ class NewsViewModel: ObservableObject {
                 } else {
                     print("Loaded \(response.articles.count) articles.")
                 }
-                /// Limitar a solo 12 articulos mas recientes
+                // Limitar a solo 12 articulos mas recientes
                 self?.articulos = response.articles.prefix(12).map { $0 }
             }
     }

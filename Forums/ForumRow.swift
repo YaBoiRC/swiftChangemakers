@@ -9,9 +9,11 @@ import SwiftUI
 struct ForumRow: View {
     let thread: ForumThread
     
+    // Estructura al cuando queremos crear un nuevo thread
     var body: some View {
         NavigationLink(destination: ForumDetailView(thread: thread)) {
             VStack(alignment: .leading, spacing: 8) {
+                // Recibimos del ForumThread el titulo, author y date con excerpt
                 Text(thread.title)
                     .font(.headline)
                     .foregroundColor(.primary)

@@ -16,6 +16,8 @@ struct NewsView: View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: false){
                 VStack(alignment: .leading) {
+                    // Seccion de Clima
+                    // Usamos el OpenWeatherMap API en NewsViewModel
                     Text("Condición Climática")
                         .font(.title)
                         .padding(.horizontal)
@@ -57,6 +59,7 @@ struct NewsView: View {
                                     )
                             }
                             
+                            // Seccion de Contaminacion del AIra
                             if let pollution = viewModel.pollution {
                                 let aqiValue = pollution.list.first?.main.aqi ?? 0
                                 VStack(alignment: .leading, spacing: 8) {
@@ -90,10 +93,12 @@ struct NewsView: View {
                         .padding(.horizontal)
                     }
                     
+                    // Seccion de Articulos usando el NewsAPI en NewsViewModel
                     Text("Artículos recientes")
                         .font(.title)
                         .padding(.horizontal)
 
+                    // Si no hay articulos, dice que los esta cargando
                     if viewModel.articulos.isEmpty {
                         Text("Cargando artículos... \(viewModel.articulos.count) artículos cargados")
                             .foregroundColor(.gray)
@@ -102,6 +107,7 @@ struct NewsView: View {
                                 viewModel.fetchNoticias()
                             }
                     } else {
+                        // Si los carga, los carga base en array y les da diseno
                         ForEach(viewModel.articulos) { articulo in
                             VStack {
                                 RoundedRectangle(cornerRadius: 15)
@@ -122,6 +128,7 @@ struct NewsView: View {
                                         }
                                         .padding()
                                     )
+                                // Cada articulo tiene un URL, si le pica al cuadrado, regresa el URL al navegador default siendo Safari
                                     .onTapGesture {
                                         if let url = URL(string: articulo.url) {
                                             UIApplication.shared.open(url)
@@ -140,7 +147,7 @@ struct NewsView: View {
             }
         }
     }
-    
+    // Descripcion para la calidad de aire
     private func aqiDescription(for value: Int) -> String {
         switch value {
         case 1:
@@ -158,6 +165,7 @@ struct NewsView: View {
         }
     }
     
+    // El cuadro de fondo cambia de color para indicar el estado de contaminacion
     private func colorForAQI(_ aqi: Int) -> Color {
         
         if aqi == 1 || aqi == 2 {
@@ -173,6 +181,7 @@ struct NewsView: View {
         return .green
     }
     
+    // Emoji para indiciar la condicion, aparece al lado de "Clima de Monterrey"
     private func emojiForWeather(description: String) -> String {
         switch description.lowercased() {
         case "cielo claro":
