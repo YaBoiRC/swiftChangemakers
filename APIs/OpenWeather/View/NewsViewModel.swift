@@ -93,8 +93,8 @@ class NewsViewModel: ObservableObject {
                 } else {
                     print("Loaded \(response.articles.count) articles.")
                 }
-                // Limitar a solo 12 articulos mas recientes
-                self?.articulos = response.articles.prefix(12).map { $0 }
+                // Limitar a solo 10 articulos mas recientes
+                self?.articulos = response.articles.prefix(10).map { $0 }
             }
     }
 }
