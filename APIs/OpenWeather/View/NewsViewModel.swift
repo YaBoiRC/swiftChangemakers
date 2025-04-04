@@ -68,18 +68,21 @@ class NewsViewModel: ObservableObject {
 
     // Funcion para cargar noticias
     func fetchNoticias() {
-        guard let url = URL(string: "https://newsapi.org/v2/everything?q=Monterrey&language=es&apiKey=d8ce97eb4e7f467b84ce30895150db1e") else {
+        let query = "Monterrey Nuevo León OR Monterrey México" // Cargamos articulos de Nuevo Leon o Mexico en general
+        guard let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let url = URL(string: "https://newsapi.org/v2/everything?q=\(encodedQuery)&language=es&sortBy=relevancy&apiKey=d8ce97eb4e7f467b84ce30895150db1e") else {
             print("Invalid URL")
             return
         }
 
         cancellable = URLSession.shared.dataTaskPublisher(for: url)
             .map { data, response in
+                // Recibimos el response del HTTP
                 if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
                     print("Error: \(httpResponse.statusCode)") // Debugging
-                    return Data() // Return empty data if the response is not successful
+                    return Data() // Regresa datos vacios por si no es existoso
                 }
-                return data
+                return data // Si es exitoso, regresa los valores que recibimos
             }
             .decode(type: NewsAPIResponse.self, decoder: JSONDecoder())
             .replaceError(with: NewsAPIResponse(articles: []))

@@ -9,6 +9,9 @@ import SwiftUI
 import CoreLocation
 
 struct MarketView: View {
+    @AppStorage("userEmail") private var userEmail: String = ""
+    @AppStorage("preferredColor") private var preferredColor: String = ""
+    
     @State private var selectedSection: MarketSection = .todos
     @State private var showAddBusiness: Bool = false
     @State private var marketThreads: [BusinessCardView] = sampleMarketThreads
@@ -19,7 +22,6 @@ struct MarketView: View {
         return threads.sorted { $0.isSponsor && !$1.isSponsor }
     }
 
-    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -75,7 +77,7 @@ struct MarketView: View {
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .imageScale(.large)
-                            .foregroundColor(.blue)
+                            .foregroundColor(Color(preferredColor))
                     }
                 }
             }
@@ -110,7 +112,6 @@ struct MarketView: View {
                     marketThreads.append(newBusinessCard)
                     
                 }
-                
             }
         }
     }

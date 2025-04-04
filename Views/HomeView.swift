@@ -117,9 +117,9 @@ struct HomeView: View {
                                     }) {
                                         VStack {
                                             Image(systemName: category.icon)
-                                                .font(.title)
+                                                .font(.system(size: 30))
                                                 .foregroundColor(.white)
-                                                .padding()
+                                                .padding().frame(width: 65, height: 65)
                                                 .background(Circle().fill(Color.blue))
                                         }
                                     }
@@ -137,10 +137,13 @@ struct HomeView: View {
                     // Checa primero que no este vacio los lugares de descubrir
                     if !discoverPlaces.isEmpty {
                         VStack(alignment: .leading, spacing: 10) {
-                            Text("Descubre")
-                                .font(.title)
-                                .bold()
-                                .padding(.top).padding(.horizontal)
+                            HStack
+                            {
+                                Text("Descubre")
+                                    .font(.title)
+                                    .bold()
+                                    .padding(.horizontal)
+                            }
                             
                             // Es un scroll view para poder las gesturas de scroll y mostrarlos horizontalmente
                             ScrollView(.horizontal, showsIndicators: false) {
@@ -187,10 +190,16 @@ struct HomeView: View {
                     
                     // Sugerencias Seccion
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Consejos para ti en \(city)")
-                            .font(.title2)
-                            .bold()
-                            .padding(.horizontal)
+                        HStack
+                        {
+                            Text("Sugerencias")
+                                .font(.title)
+                                .bold()
+                                .padding(.horizontal)
+                            Text("para ti en \(city)")
+                                .padding(.horizontal)
+                                .italic()
+                        }
                         ForEach(tips, id: \.self) { tip in
                             TipCard(tip: tip)
                         }
@@ -216,12 +225,14 @@ struct HomeView: View {
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .padding(.vertical, 30)
+                            .padding(.bottom, 10)
                         Text(formattedDate)
                             .font(.subheadline)
                             .foregroundColor(Color.primary.opacity(0.6))
                             .bold()
                             .padding(.vertical, 30)
                             .padding(.top, 5)
+                            .padding(.bottom, 10)
                     }
                 }
             }
@@ -287,14 +298,16 @@ struct Category: Identifiable {
 
 let categories: [Category] = [
     Category(name: "Hospitales", icon: "cross.case.fill", searchType: "hospital"),
-    Category(name: "Transporte", icon: "bus.fill", searchType: "station"),
+    Category(name: "Transporte", icon: "bus.fill", searchType: "metro, bus"),
     Category(name: "Bancos", icon: "building.columns.fill", searchType: "bank"),
     Category(name: "Gimnasios", icon: "figure.strengthtraining.traditional", searchType: "gym"),
+    Category(name: "Gasolinera", icon: "fuelpump.fill", searchType: "fuel"),
+    Category(name: "Cargadores", icon: "ev.charger.fill", searchType: "charger"),
     Category(name: "Hotel", icon: "building.fill", searchType: "hotel"),
     Category(name: "Parques", icon: "leaf.fill", searchType: "park"),
     Category(name: "Escuelas", icon: "book.fill", searchType: "school"),
-    Category(name: "Policía", icon: "shield.lefthalf.filled", searchType: "police, policía"),
-    Category(name: "Bomberos", icon: "flame.fill", searchType: "fire_man, fire_station, fire_men, fire, bomberos")
+    Category(name: "Policía", icon: "shield.lefthalf.filled", searchType: "police"),
+    Category(name: "Bomberos", icon: "flame.fill", searchType: "fire")
 ]
 
 // Funcion para poder abrir el Apple Maps

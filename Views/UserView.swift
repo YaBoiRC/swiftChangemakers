@@ -10,8 +10,12 @@ import SwiftUI
 struct UserView: View {
     // Cargamos el usuario base el AppStorage y su informacion basica
     @AppStorage("username") private var username = "Juan451"
-    @State private var email = "juanpersonal123@gmail.com"
-    @State private var selectedColor: Color = .blue
+    @AppStorage("email") private var email: String = "juanpersonal123@gmail.com"
+    @AppStorage("selectedColorHex") private var selectedColorHex: String = Color.blue.toHex()
+    private var selectedColor: Color {
+        get { Color(hex: selectedColorHex) ?? .blue }
+        set { selectedColorHex = newValue.toHex() }
+    }
     
     var body: some View {
         NavigationView {
@@ -37,7 +41,7 @@ struct UserView: View {
                 Section {
                     // Una tab para los ajustes
                     DisclosureGroup("Settings") {
-                        SettingsView(selectedColor: $selectedColor)
+                        SettingsView(selectedColorHex: $selectedColorHex)
                     }
                 }
             }
@@ -50,7 +54,13 @@ struct UserView: View {
 struct SettingsView: View {
     @AppStorage("username") private var username: String = "Juan451"
     @State private var newUsername: String = ""
-    @Binding var selectedColor: Color
+    @Binding var selectedColorHex: String
+    private var selectedColor: Color {
+        Color(hex: selectedColorHex) ?? .blue
+    }
+    private func updateSelectedColor(to color: Color) {
+        selectedColorHex = color.toHex()
+    }
     @State private var tappedColor: Color = .blue
     
     var body: some View {
@@ -78,7 +88,7 @@ struct SettingsView: View {
                         .overlay(Circle().stroke(Color.white, lineWidth: 1))
                         .onTapGesture {
                             withAnimation {
-                                selectedColor = color
+                                updateSelectedColor(to: color)
                                 tappedColor = color
                             }
                         }
@@ -108,6 +118,45 @@ struct SettingsView: View {
             .padding(.horizontal)
         }
         .padding()
+    }
+}
+
+extension Color {
+    func toHex() -> String {
+        UIColor(self).toHex() ?? "#0000FF"
+    }
+
+    init?(hex: String) {
+        guard let uiColor = UIColor(hex: hex) else { return nil }
+        self = Color(uiColor)
+    }
+}
+
+// Usamos una extension para poder salvar el color del usuario base de HEX
+extension UIColor {
+    convenience init?(hex: String) {
+        var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
+
+        var rgb: UInt64 = 0
+        Scanner(string: hexSanitized).scanHexInt64(&rgb)
+
+        let r = CGFloat((rgb & 0xFF0000) >> 16) / 255.0
+        let g = CGFloat((rgb & 0x00FF00) >> 8) / 255.0
+        let b = CGFloat(rgb & 0x0000FF) / 255.0
+
+        self.init(red: r, green: g, blue: b, alpha: 1.0)
+    }
+
+    func toHex() -> String? {
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+
+        guard getRed(&r, green: &g, blue: &b, alpha: &a) else { return nil }
+
+        return String(format: "#%02X%02X%02X", Int(r * 255), Int(g * 255), Int(b * 255))
     }
 }
 

@@ -53,6 +53,11 @@ let guadalajaraPlaces: [DiscoverPlace] = [
         coordinate: CLLocationCoordinate2D(latitude: 20.6747, longitude: -103.3474)
     ),
     DiscoverPlace(
+        name: "Plaza Andares",
+        imageName: "plazaAndares",
+        coordinate: CLLocationCoordinate2D(latitude: 20.710020, longitude: -103.412239)
+    ),
+    DiscoverPlace(
         name: "Instituto Cultural Cabañas",
         imageName: "cabanas",
         coordinate: CLLocationCoordinate2D(latitude: 20.6730, longitude: -103.3440)
@@ -63,13 +68,8 @@ let guadalajaraPlaces: [DiscoverPlace] = [
         coordinate: CLLocationCoordinate2D(latitude: 20.6739, longitude: -103.3481)
     ),
     DiscoverPlace(
-        name: "Mercado Libertad",
-        imageName: "mercadoLibertad",
-        coordinate: CLLocationCoordinate2D(latitude: 20.6735, longitude: -103.3447)
-    ),
-    DiscoverPlace(
-        name: "Parque Agua Azul",
-        imageName: "parqueAguaAzul",
-        coordinate: CLLocationCoordinate2D(latitude: 20.6917, longitude: -103.3500)
+        name: "Zoologico de Guadalajara",
+        imageName: "zoologicoGuadalajara",
+        coordinate: CLLocationCoordinate2D(latitude: 20.729500, longitude: -103.3068834)
     )
 ]
